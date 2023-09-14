@@ -1,0 +1,14 @@
+on:
+  workflow_call:
+    inputs:
+      execute_modules:
+        required: true
+        type: string
+jobs:
+  plan-apply:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        module: ${{ fromJSON(inputs.execute_modules) }}
+    steps:
+      - run: echo '${{ matrix.module }}'
