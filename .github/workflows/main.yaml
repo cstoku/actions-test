@@ -2,12 +2,15 @@ on: push
 
 jobs:
   terragrunt:
-    runs-on: ubuntu-latest
     strategy:
       max-parallel: 1
       matrix:
         digraph: [[1], [2,3], [4]]
-    steps:
-      - uses: ./.github/workflows/sub.yaml
-        with:
-          execute_modules: ${{ toJSON(matrix.digraph) }}
+    uses: ./.github/workflows/sub.yaml
+    with:
+      execute_modules: ${{ toJSON(matrix.digraph) }}
+    #steps:
+    #  - uses: actions/checkout@v4
+    #  - uses: ./.github/workflows/sub.yaml
+    #    with:
+    #      execute_modules: ${{ toJSON(matrix.digraph) }}
